@@ -1,0 +1,44 @@
+Goal: Write a program to report on failures that are recorded in a complex log file.
+An organization runs non-interactive programs, called jobs, for a user on a pool of machines that it manages for that purpose. Often, there are more jobs waiting to run than there are available machines at that moment, and so An organization continuously tracks waiting jobs and available machines and seeks the best way to match one to the other. A few other interesting points:
+If a machine fails to run a job, An organization will keep trying to find a machine that can run the job successfully.
+The log file for this problem contains information for over 300 jobs, which An organization ran over the course of several hours as machines became available.
+An organization recorded many events for each job in the log, most of which you will ignore for this problem.
+For this problem, we are interested in reporting on jobs that failed one or more times before completing successfully. This information might be helpful for improving An organization and the pool of machines that it manages.
+Failures in the Log File
+
+To analyze the log file, your program must look for failures. Here are two examples of failures:
+007 (69180.000.000) 04/16 04:29:49 Shadow exception!
+        FAILED TO SEND INITIAL KEEP ALIVE TO OUR PARENT <128.105.244.224:9618?sock=3202_995c_3>
+        0  -  Run Bytes Sent By Job
+        0  -  Run Bytes Received By Job
+...
+007 (69188.000.000) 04/16 04:32:07 Shadow exception!
+        Error from slot1@c159.chtc.wisc.edu: Failed to create a new VM
+        0  -  Run Bytes Sent By Job
+        983095  -  Run Bytes Received By Job
+...
+A few notes about the failues:
+Every failure starts with 007 in the first column, as highlighted above
+The first number in parentheses (e.g., 69180 or 69188 above) is called the job ID and uniquely identifies a job
+A job can fail more than once; each failure will start with 007 and the job ID
+The date (month / day) and time of the failure are recorded
+After each 007 line, the next line contains the failure message itself
+The file contains 007 failures with different messages, too, but they all follow this format, and your program should handle all failure messages. Also, the file contains many other kinds of events and data, which your program should ignore.
+How to Analyze the Failures
+
+Write a program to analyze all the failure events as described above. For each unique failure message (the second line of text), tally and output the following pieces of information:
+The failure message itself, without leading or trailing whitespace
+The number of times that the error occurred
+The earliest and latest times that the error occurred; hour and minute are fine, or you may include seconds; also you may assume that all events happened on the same day, if you like
+The number of unique jobs that were affected; use the job ID in each failure event to determine unique jobs
+Report this information for all failure messages. The order in which the messages are listed does not matter.
+Sample Output
+
+Below is a fragment of possible output from the program. Note that each section of output identifies one failure message and all of the associated data for that type of failure. Your program may follow this format or something similar that you design.
+Error from slot1@c149.chtc.wisc.edu: VMGAHP_ERR_INTERNAL
+- Occurred 37 times from 04:40 to 05:23
+- Affected 34 unique jobs
+
+FAILED TO SEND INITIAL KEEP ALIVE TO OUR PARENT <128.105.244.224:9618?sock=3202_995c_3>
+- Occurred 111 times from 04:29 to 04:29
+- Affected 39 unique jobs
