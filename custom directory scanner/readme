@@ -1,0 +1,7 @@
+Goal: Write a program to display information about files in directories recursively, a little bit like the standard Linux system command ls but with different formatting.
+The program will accept a single command-line argument, which is intended to be a path to a directory. For the given directory, and each of the directories contained within it recursively, print the path to the directory and a list of the regular files in it.
+Note the following requirements:
+Within a directory, list files in descending numeric order by file size.
+For each file, print the file name, size, and last modification timestamp.
+Format the output clearly. (See below for one possible format.)
+You may not use the ls program (or similar) at all in your solution.
